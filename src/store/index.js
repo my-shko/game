@@ -88,8 +88,17 @@ export default createStore({
     changeCurrentHPEnt(state, params) {
       params.ent.currentHP += params.value;
     },
-    changeCurrentHPEnt(state, params) {
-      params.ent.currentHP += params.value;
+    changeCurrentMPEnt(state, params) {
+      params.ent.currentMP += params.value;
+    },
+    setCurrentHPEnt(state, params) {
+      params.ent.currentHP = params.value;
+    },
+    setCurrentMPEnt(ent, params) {
+      params.ent.currentMP = params.value;
+    },
+    changeIsAlive(state, params) {
+      params.ent.isAlive = params.value;
     }
   },
   actions: {
@@ -110,6 +119,20 @@ export default createStore({
       setTimeout(() => {
         context.commit('shiftAnim');
       }, 500);
+    },
+    deathEnt(context, ent) {
+      context.commit('changeIsAlive', {ent, value: false});
+      context.commit('setCurrentHPEnt', {ent, value: 0});
+      context.commit('setCurrentMPEnt', {ent, value: 0});
+
+      console.log('death');
+    },
+    reviveEnt(context, params) {
+      context.commit('setCurrentHPEnt', {ent: params.ent, value: params.hp});
+      context.commit('setCurrentMPEnt', {ent: params.ent, value: params.mp});
+      context.commit('changeIsAlive', {ent: params.ent, value: true});
+
+      console.log('revive');
     }
   },
   modules: {

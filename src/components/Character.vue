@@ -8,7 +8,13 @@
       height: charSize + 'px'
     }"
   >
-    <div class="character-body" :style="{transform: 'rotate(' + angle + 'rad)'}"></div>
+    <div
+      class="character-body"
+      :style="{
+        transform: 'rotate(' + angle + 'rad)',
+        backgroundColor: bgc
+      }"
+    ></div>
     <div
       class="ch-bars"
       :style="{width: charSize + 'px'}"
@@ -59,6 +65,10 @@ export default {
       let cur = store.state.character.currentMP;
       let max = store.state.character.maxMP;
       return cur / (max / 100);
+    },
+    bgc() {
+      console.log(store.state.character.isAlive ? 'golden' : '#CCC')
+      return store.state.character.isAlive ? 'gold' : '#CCC';
     }
   }
 }
@@ -73,7 +83,6 @@ export default {
     left: 0
     width: 100%
     height: 100%
-    background-color: rgba(0, 50, 255, 0.5)
     border-radius: 50%
     &::after
       width: 6px

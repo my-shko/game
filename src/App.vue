@@ -2,6 +2,9 @@
   <div class="app">
     <Field />
     <button @click="log">Console log state</button>
+    <button @click="hp">hp</button>
+    <button @click="mp">mp</button>
+    <button @click="revive">revive</button>
   </div>
 </template>
 
@@ -31,6 +34,19 @@ export default {
   methods: {
     log() {
       console.log(store.state);
+    },
+    hp() {
+      store.commit('changeCurrentHPEnt', {ent: store.state.character, value: -5})
+    },
+    mp() {
+      store.commit('changeCurrentMPEnt', {ent: store.state.character, value: -5});
+    },
+    revive() {
+      if(store.state.character.isAlive) {
+        console.log('still alive');
+      } else {
+        store.dispatch('reviveEnt', {ent: store.state.character, hp: 10, mp: 20});
+      }
     }
   }
 }

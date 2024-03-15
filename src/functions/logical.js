@@ -47,3 +47,14 @@ export const updateLocationPosition = timeDif => { // оновлює позиц�
 		}
 	}
 }
+
+export const controlEntityState = (timeDif, ent) => {
+	if (!ent.isAlive) return;
+	
+	let hp = ent.currentHP;
+	let maxHP = ent.maxHP;
+
+	if (hp <= 0) {
+		store.dispatch('deathEnt', store.state.character);
+	}
+}

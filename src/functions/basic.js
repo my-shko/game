@@ -1,8 +1,9 @@
 import store from './../store';
-import {controlEntityMoving, updateLocationPosition} from './logical';
+import {controlEntityMoving, updateLocationPosition, controlEntityState} from './logical';
 
 const updateMainCharacter = (timeDif) => { // оновлюємо головного персонажа
 	controlEntityMoving(timeDif, store.state.character); // контролюємо рух по полю
+  controlEntityState(timeDif, store.state.character);
 }
 
 const updateCurrentLocation = (timeDif) => { // оновлюємо локацію на екрані:
